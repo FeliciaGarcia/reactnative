@@ -8,3 +8,21 @@ export default class Movies extends Component {
       isLoading: true
     }
 }
+componentDidMount() {
+  return fetch('https://facebook.github.io/react-native/movies.json')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => !==
+      r2});
+      this.setState({
+        isLoading: false,
+        dataSource: ds.cloneWithRows(responsJson.moveis),
+      }, function() {
+
+
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
